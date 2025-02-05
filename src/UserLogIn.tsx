@@ -1,20 +1,21 @@
 import { NavLink, useNavigate } from "react-router";
 import { IoHome } from "react-icons/io5";
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserName, setPassword, setError } from "./redux/logIn";
 
 function UserLogIn(params: type) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [userName, setUserName] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [error, setError] = useState<string>("");
+  const { userName, password, error } = useSelector((state) => state.login);
 
-  const handleUserName = (event) => {
-    setUserName(event.target.value);
+  const handleUserName = (event: any) => {
+    dispatch(setUserName(event.target.value));
   };
 
-  const handlePassword = (event) => {
-    setPassword(event.target.value);
+  const handlePassword = (event: any) => {
+    dispatch(setPassword(event.target.value));
   };
 
   const handleLoginBtn = async () => {
@@ -36,7 +37,7 @@ function UserLogIn(params: type) {
       navigate("/watch-list");
       //navigate to the watch list page
     } else {
-      setError("Invalid username or password");
+      dispatch(setError("Invalid username or password"));
     }
   };
 

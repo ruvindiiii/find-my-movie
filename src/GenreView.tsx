@@ -5,9 +5,7 @@ import MovieList from "./MovieList";
 import { useDispatch } from "react-redux";
 import { setGenreMovies } from "./redux/genreMovies";
 import { useSelector } from "react-redux";
-
-const bearer =
-  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNThkZDVjOTUxZGU3NDgxMmQ0N2VhYWM1Nzc1NGQ0NiIsIm5iZiI6MTY5NTk4NjU2My45MjMsInN1YiI6IjY1MTZiMzgzOTY3Y2M3MDBhY2I4NjZiZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sYLz8lc9f6Wzx3VIDSVSfLYOhTgPClAOEpPVhO8jIAM";
+import { genreMovies } from "./api";
 
 function GenreView() {
   const dispatch = useDispatch();
@@ -17,14 +15,7 @@ function GenreView() {
   let params = useParams();
   useEffect(() => {
     const GetGenreMovies = async () => {
-      let url = `https://api.themoviedb.org/3/discover/movie?with_genres=${params.id}`;
-      let response = await fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization: bearer,
-        },
-      });
-      let result = await response.json();
+      let result = await genreMovies(params.id);
       let genreMovieArr = result.results.map((obj: any) => {
         return {
           title: obj.title,

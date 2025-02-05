@@ -5,7 +5,7 @@ import MovieInfo from "./MovieInfoPage.tsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import GenreView from "./GenreView.tsx";
 import UserLogIn from "./UserLogIn";
-import SignUp from "./SignUp.tsx";
+import SignUp from "./SignUpPage.tsx";
 import WatchList from "./WatchList.tsx";
 import store from "./redux/store.ts";
 import { Provider } from "react-redux";

@@ -4,29 +4,25 @@ import toast, { Toaster } from "react-hot-toast";
 import { RiPlayListAddFill } from "react-icons/ri";
 import { IoHome } from "react-icons/io5";
 import { addToList } from "./redux/watchList";
-import { setMovieInfo, setMovieInfoTrailer } from "./redux/movieInfo";
+import {
+  setMovieInfo,
+  setMovieInfoTrailer,
+  setPurchaseProvider,
+  setRentProvider,
+} from "./redux/movieInfo";
 import { useDispatch, useSelector } from "react-redux";
-
-const bearer =
-  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNThkZDVjOTUxZGU3NDgxMmQ0N2VhYWM1Nzc1NGQ0NiIsIm5iZiI6MTY5NTk4NjU2My45MjMsInN1YiI6IjY1MTZiMzgzOTY3Y2M3MDBhY2I4NjZiZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sYLz8lc9f6Wzx3VIDSVSfLYOhTgPClAOEpPVhO8jIAM";
+import { getMovieData, getMovieDataUrl, movieProviders } from "./api";
+import { MovieProviderShape } from "./types";
 
 function MovieInfo() {
   const dispatch = useDispatch();
-  const { movieInfo, movieInfoTrailer } = useSelector(
-    (state) => state.movieInfo
-  );
+  const { movieInfo, movieInfoTrailer, purcaseProvider, rentProvider } =
+    useSelector((state) => state.movieInfo);
   let params = useParams();
+
   useEffect(() => {
     const GetData = async () => {
-      let url = `https://api.themoviedb.org/3/movie/${params.id}`;
-      let response = await fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization: bearer,
-        },
-      });
-
-      let result = await response.json();
+      let result = await getMovieData(params.id);
       dispatch(
         setMovieInfo({
           title: result.original_title,
@@ -35,19 +31,10 @@ function MovieInfo() {
           image: result.poster_path,
         })
       );
-
-      console.log(result);
     };
 
     const GetTrailer = async () => {
-      let movieInfoUrl = `https://api.themoviedb.org/3/movie/${params.id}/videos`;
-      let response = await fetch(movieInfoUrl, {
-        method: "GET",
-        headers: {
-          Authorization: bearer,
-        },
-      });
-      let result = await response.json();
+      let result = await getMovieDataUrl(params.id);
 
       if (result.results.length) {
         let movieTrailerUrl = `https://www.youtube.com/embed/${result.results[0].key}`;
@@ -55,8 +42,31 @@ function MovieInfo() {
       }
     };
 
+    const GetMovieProviders = async () => {
+      let result = await movieProviders(params.id);
+      let Us = result.results.US;
+      let purchaseProviders = Us.buy.map((providerInfoObj: any) => {
+        return {
+          provider: providerInfoObj.provider_name,
+          logo: providerInfoObj.logo_path,
+        };
+      });
+
+      dispatch(setPurchaseProvider(purchaseProviders));
+
+      let rentProviders = Us.rent.map((providerInfoObj: any) => {
+        return {
+          provider: providerInfoObj.provider_name,
+          logo: providerInfoObj.logo_path,
+        };
+      });
+
+      dispatch(setRentProvider(rentProviders));
+    };
+
     GetData();
     GetTrailer();
+    GetMovieProviders();
   }, [params.id]);
 
   const hadleAddToWatchList = async () => {
@@ -80,6 +90,18 @@ function MovieInfo() {
             src={"https://image.tmdb.org/t/p/w500" + movieInfo.image}
           />
           <p className={"text-white"}>{movieInfo.overview}</p>
+        </div>
+        <div>
+          {purcaseProvider.map((providerObj: MovieProviderShape) => {
+            return (
+              <div>
+                {providerObj.provider}
+                <img
+                  src={"https://image.tmdb.org/t/p/w500" + providerObj.logo}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
       <NavLink to="/">

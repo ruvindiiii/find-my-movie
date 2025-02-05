@@ -5,6 +5,8 @@ import { genreMoviesSlice } from "./genreMovies";
 import { landingPageMoviesSlice } from "./landingPageMovies";
 import { movieInfoSlice } from "./movieInfo";
 import { headerSearchSlice } from "./headerSearch";
+import { SignUpPageSlice } from "./signup";
+import { logInSlice } from "./logIn";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +16,8 @@ const store = configureStore({
     landingPageMovies: landingPageMoviesSlice.reducer,
     movieInfo: movieInfoSlice.reducer,
     headerSearch: headerSearchSlice.reducer,
+    signUp: SignUpPageSlice.reducer,
+    login: logInSlice.reducer,
   },
 });
 

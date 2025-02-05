@@ -1,23 +1,23 @@
 import { NavLink } from "react-router";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setPassWord, setUserName, setName } from "./redux/signup";
 
 function SignUp(params: type) {
-  const [name, setName] = useState<string>("");
-  const [userName, setUserName] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [response, setResponse] = useState(null);
+  const dispatch = useDispatch();
+  const { password, userName, name } = useSelector((state) => state.signUp);
 
   const handleName = (event: any) => {
-    setName(event.target.value);
+    dispatch(setName(event.target.value));
   };
 
   const handleUserName = (event: any) => {
-    setUserName(event.target.value);
+    dispatch(setUserName(event.target.value));
   };
 
   const handlePassword = (event: any) => {
-    setPassword(event.target.value);
+    dispatch(setPassWord(event.target.value));
   };
 
   const handleSignUpBtn = async () => {
@@ -38,7 +38,6 @@ function SignUp(params: type) {
     });
 
     const result = await response.json();
-    setResponse(result);
   };
 
   return (

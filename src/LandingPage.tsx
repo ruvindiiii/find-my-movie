@@ -10,6 +10,7 @@ import {
 } from "./redux/landingPageMovies";
 import { useSelector } from "react-redux";
 import "./App.css";
+import { getLandingMovies } from "./api";
 
 const bearer =
   "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNThkZDVjOTUxZGU3NDgxMmQ0N2VhYWM1Nzc1NGQ0NiIsIm5iZiI6MTY5NTk4NjU2My45MjMsInN1YiI6IjY1MTZiMzgzOTY3Y2M3MDBhY2I4NjZiZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sYLz8lc9f6Wzx3VIDSVSfLYOhTgPClAOEpPVhO8jIAM";
@@ -22,14 +23,7 @@ function LandingPage() {
 
   useEffect(() => {
     const GetData = async () => {
-      let url = "https://api.themoviedb.org/3/discover/movie";
-      let response = await fetch(url, {
-        method: "GET",
-        headers: {
-          Authorization: bearer,
-        },
-      });
-      let result = await response.json();
+      let result = await getLandingMovies();
       let mappedMovies = result.results.map((obj: any) => {
         return {
           title: obj.title,
