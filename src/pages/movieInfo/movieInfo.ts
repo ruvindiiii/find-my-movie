@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { MovieShape, MovieProviderShape } from "../types";
+import { MovieShape, MovieProviderShape } from "../../types";
 
 type MovieInfoShape = {
   movieInfo: MovieShape;

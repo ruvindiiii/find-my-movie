@@ -1,7 +1,8 @@
-import LandingPage from "./LandingPage";
-import SearchMovies from "./SearchMovies";
-import Header from "./Header";
+import LandingPage from "../pages/landingPage/LandingPage";
+import SearchMovies from "../components/SearchMovies";
+import Header from "../header/Header";
 import { useSelector } from "react-redux";
+import "./App.css";
 
 function App() {
   const { inputValue } = useSelector((state) => state.headerSearch);

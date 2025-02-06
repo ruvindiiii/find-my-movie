@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from "react-router";
 import { IoHome } from "react-icons/io5";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setUserName, setPassword, setError } from "./redux/logIn";
+import { setUserName, setPassword, setError } from "./logIn";
 
 function UserLogIn(params: type) {
   const dispatch = useDispatch();

@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useParams } from "react-router";
 
-import MovieList from "./MovieList";
+import MovieList from "../../components/MovieList";
 import { useDispatch } from "react-redux";
-import { setGenreMovies } from "./redux/genreMovies";
+import { setGenreMovies } from "./genreMovies";
 import { useSelector } from "react-redux";
-import { genreMovies } from "./api";
+import { genreMovies } from "../../api";
 
 function GenreView() {
   const dispatch = useDispatch();

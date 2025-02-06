@@ -3,16 +3,16 @@ import { NavLink, useParams } from "react-router";
 import toast, { Toaster } from "react-hot-toast";
 import { RiPlayListAddFill } from "react-icons/ri";
 import { IoHome } from "react-icons/io5";
-import { addToList } from "./redux/watchList";
+import { addToList } from "../watchList/watchList";
 import {
   setMovieInfo,
   setMovieInfoTrailer,
   setPurchaseProvider,
   setRentProvider,
-} from "./redux/movieInfo";
+} from "./movieInfo";
 import { useDispatch, useSelector } from "react-redux";
-import { getMovieData, getMovieDataUrl, movieProviders } from "./api";
-import { MovieProviderShape } from "./types";
+import { getMovieData, getMovieDataUrl, movieProviders } from "../../api";
+import { MovieProviderShape } from "../../types";
 
 function MovieInfo() {
   const dispatch = useDispatch();

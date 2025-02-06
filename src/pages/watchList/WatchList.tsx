@@ -1,7 +1,7 @@
 import { NavLink } from "react-router";
 import { useSelector } from "react-redux";
 import { GiHeartMinus } from "react-icons/gi";
-import { removeFromList } from "./redux/watchList";
+import { removeFromList } from "./watchList";
 import { useDispatch } from "react-redux";
 
 function WatchList(params: type) {

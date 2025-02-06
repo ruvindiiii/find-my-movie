@@ -1,12 +1,8 @@
-import { useEffect, useState } from "react";
-import type { MovieShape } from "./types";
+import { useEffect } from "react";
 import MovieList from "./MovieList";
 import { useSelector, useDispatch } from "react-redux";
-import { setSearchResults } from "./redux/headerSearch";
-import { findMovies } from "./api";
-
-const bearer =
-  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNThkZDVjOTUxZGU3NDgxMmQ0N2VhYWM1Nzc1NGQ0NiIsIm5iZiI6MTY5NTk4NjU2My45MjMsInN1YiI6IjY1MTZiMzgzOTY3Y2M3MDBhY2I4NjZiZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sYLz8lc9f6Wzx3VIDSVSfLYOhTgPClAOEpPVhO8jIAM";
+import { setSearchResults } from "../header/headerSearch";
+import { findMovies } from "../api";
 
 function SearchMovies() {
   const dispatch = useDispatch();

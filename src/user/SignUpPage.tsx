@@ -1,8 +1,7 @@
 import { NavLink } from "react-router";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPassWord, setUserName, setName } from "./redux/signup";
+import { setPassWord, setUserName, setName } from "./signUp";
 
 function SignUp(params: type) {
   const dispatch = useDispatch();

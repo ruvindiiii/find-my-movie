@@ -1,4 +1,4 @@
-import type { MovieShape } from "./types";
+import type { MovieShape } from "../types";
 import { NavLink } from "react-router";
 
 type MovieListProps = {

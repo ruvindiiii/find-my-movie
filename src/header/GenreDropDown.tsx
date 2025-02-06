@@ -2,9 +2,9 @@ import { Button, Dropdown, Space } from "antd";
 import { useEffect } from "react";
 import { NavLink } from "react-router";
 import { useDispatch } from "react-redux";
-import { setGenres } from "./redux/genres";
+import { setGenres } from "./genres";
 import { useSelector } from "react-redux";
-import { getGenreObjArr } from "./api";
+import { getGenreObjArr } from "../api";
 
 const DropDown = () => {
   const dispatch = useDispatch();

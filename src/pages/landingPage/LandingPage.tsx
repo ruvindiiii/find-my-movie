@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { IoCaretBackOutline, IoCaretForwardOutline } from "react-icons/io5";
 
-import MovieList from "./MovieList";
+import MovieList from "../../components/MovieList";
 import { useDispatch } from "react-redux";
 import {
   setLandingPageMovies,
   setLandingPageTrailers,
   setLandingPageTrailerIndex,
-} from "./redux/landingPageMovies";
+} from "./landingPageMovies";
 import { useSelector } from "react-redux";
-import "./App.css";
-import { getLandingMovies } from "./api";
+import { getLandingMovies } from "../../api";
 
 const bearer =
   "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNThkZDVjOTUxZGU3NDgxMmQ0N2VhYWM1Nzc1NGQ0NiIsIm5iZiI6MTY5NTk4NjU2My45MjMsInN1YiI6IjY1MTZiMzgzOTY3Y2M3MDBhY2I4NjZiZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sYLz8lc9f6Wzx3VIDSVSfLYOhTgPClAOEpPVhO8jIAM";

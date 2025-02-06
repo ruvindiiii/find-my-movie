@@ -1,10 +1,9 @@
-import { FaSearch } from "react-icons/fa";
-import Logo from "./assets/logo.png";
+import Logo from "../assets/logo.png";
 import DropDown from "./GenreDropDown";
 import { MdAccountCircle } from "react-icons/md";
 import { RiPlayListAddFill } from "react-icons/ri";
 import { useSelector, useDispatch } from "react-redux";
-import { setInputValue } from "./redux/headerSearch";
+import { setInputValue } from "./headerSearch";
 
 import { NavLink } from "react-router";
 
