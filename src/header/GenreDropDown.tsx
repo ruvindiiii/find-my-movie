@@ -6,7 +6,7 @@ import { setGenres } from "./genres";
 import { useSelector } from "react-redux";
 import { getGenreObjArr } from "../api";
 
-const DropDown = () => {
+const GenreDropDown = () => {
   const dispatch = useDispatch();
 
   const { genres } = useSelector((state) => state.genre);
@@ -46,4 +46,4 @@ const DropDown = () => {
     </Space>
   );
 };
-export default DropDown;
+export default GenreDropDown;

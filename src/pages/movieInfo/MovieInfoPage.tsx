@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { NavLink, useParams } from "react-router";
 import toast, { Toaster } from "react-hot-toast";
 import { RiPlayListAddFill } from "react-icons/ri";
@@ -12,7 +12,7 @@ import {
 } from "./movieInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovieData, getMovieDataUrl, movieProviders } from "../../api";
-import { MovieProviderShape } from "../../types";
+import ProviderLogos from "./MovieProviderLogos";
 
 function MovieInfo() {
   const dispatch = useDispatch();
@@ -76,14 +76,27 @@ function MovieInfo() {
 
   return (
     <>
+      <div
+        className={
+          "text-white flex flex-row justify-end items-center pb-[25px] pt-[25px] pr-[40px] gap-3 fixed top-0 left-0 w-full bg-black"
+        }
+      >
+        <NavLink to="/">
+          <IoHome className="h-[30px] w-[30px] text-white" />
+        </NavLink>
+
+        <RiPlayListAddFill
+          className="h-[30px] w-[30px]"
+          onClick={hadleAddToWatchList}
+        />
+      </div>
       <div>
         <iframe
           src={movieInfoTrailer}
           allow="autoplay"
-          className="w-full h-[620px] mb-10"
+          className="w-full h-[620px] mb-10 mt-[110px]"
           title="video"
         />
-        {/* <h1>{movieInfo.title}</h1> */}
         <div className="flex flex-row justify-center items-center">
           <img
             className="rounded-md group/item h-[300px] mr-[20px]"
@@ -91,27 +104,9 @@ function MovieInfo() {
           />
           <p className={"text-white"}>{movieInfo.overview}</p>
         </div>
-        <div>
-          {purcaseProvider.map((providerObj: MovieProviderShape) => {
-            return (
-              <div>
-                {providerObj.provider}
-                <img
-                  src={"https://image.tmdb.org/t/p/w500" + providerObj.logo}
-                />
-              </div>
-            );
-          })}
-        </div>
+        <ProviderLogos purchaseProviders={purcaseProvider} />
       </div>
-      <NavLink to="/">
-        <button>
-          <IoHome className="h-[20px] w-[20px]" />
-        </button>
-      </NavLink>
-      <button onClick={hadleAddToWatchList}>
-        <RiPlayListAddFill className="h-[20px] w-[20px]" />
-      </button>
+
       <Toaster position="bottom-right" reverseOrder={false} />
     </>
   );

@@ -84,7 +84,7 @@ function LandingPage() {
           <iframe
             src={landingTrailers[landingTrailerIndex]}
             allow="autoplay"
-            className="w-full h-[620px]"
+            className="w-full h-[620px] mt-[110px]"
             title="video"
           />
           <button onClick={handleNextBtn} className="bg-black color-white">

@@ -45,17 +45,20 @@ function UserLogIn(params: type) {
     <>
       <div className="text-white flex flex-col justify-around items-center  ">
         <input
+          id="username"
           onChange={handleUserName}
           placeholder="user name"
           className="text-black bg-white h-[50px] w-[350px] mb-[16px] rounded-md pl-[20px]"
         ></input>
         <input
+          id="password"
           onChange={handlePassword}
           placeholder="password"
           className="text-black bg-white h-[50px] w-[350px] mb-[66px] rounded-md pl-[20px]"
         ></input>
         <p>{error}</p>
         <button
+          id="login-button"
           onClick={handleLoginBtn}
           className=" text-black  mb-[16px] w-[350px] bg-white"
         >
