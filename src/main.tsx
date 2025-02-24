@@ -9,6 +9,8 @@ import SignUp from "./user/SignUpPage.tsx";
 import WatchList from "./pages/watchList/WatchList.tsx";
 import store from "./redux/store.ts";
 import { Provider } from "react-redux";
+import StateSyncer from "./components/StateSyncer.tsx";
+import Header from "./header/Header.tsx";
 
 import "./output.css";
 
@@ -18,6 +20,8 @@ createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <StrictMode>
       <Provider store={store}>
+        <StateSyncer />
+        <Header />
         <Routes>
           <Route path="/" element={<App />} />
           <Route path="/user-login" element={<UserLogIn />} />

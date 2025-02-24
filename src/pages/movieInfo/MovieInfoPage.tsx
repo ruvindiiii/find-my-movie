@@ -1,23 +1,26 @@
 import { useEffect } from "react";
-import { NavLink, useParams } from "react-router";
+import { NavLink, useParams, useNavigate } from "react-router";
 import toast, { Toaster } from "react-hot-toast";
-import { RiPlayListAddFill } from "react-icons/ri";
+import { IoMdAdd } from "react-icons/io";
+import { HiViewList } from "react-icons/hi";
 import { IoHome } from "react-icons/io5";
 import { addToList } from "../watchList/watchList";
 import {
   setMovieInfo,
   setMovieInfoTrailer,
-  setPurchaseProvider,
+  setPurchaseProviders,
   setRentProvider,
 } from "./movieInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovieData, getMovieDataUrl, movieProviders } from "../../api";
-import ProviderLogos from "./MovieProviderLogos";
+import ProviderLogos from "./ProviderLogos";
 
 function MovieInfo() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { movieInfo, movieInfoTrailer, purcaseProvider, rentProvider } =
+  const { movieInfo, movieInfoTrailer, purchaseProviders, rentProvider } =
     useSelector((state) => state.movieInfo);
+  const { token } = useSelector((state) => state.login);
   let params = useParams();
 
   useEffect(() => {
@@ -45,14 +48,17 @@ function MovieInfo() {
     const GetMovieProviders = async () => {
       let result = await movieProviders(params.id);
       let Us = result.results.US;
-      let purchaseProviders = Us.buy.map((providerInfoObj: any) => {
-        return {
-          provider: providerInfoObj.provider_name,
-          logo: providerInfoObj.logo_path,
-        };
-      });
-
-      dispatch(setPurchaseProvider(purchaseProviders));
+      if (Us) {
+        let purchaseProviders = Us.buy.map((providerInfoObj: any) => {
+          return {
+            name: providerInfoObj.provider_name,
+            logo: providerInfoObj.logo_path,
+          };
+        });
+        dispatch(setPurchaseProviders(purchaseProviders));
+      } else {
+        dispatch(setPurchaseProviders([]));
+      }
 
       let rentProviders = Us.rent.map((providerInfoObj: any) => {
         return {
@@ -70,26 +76,27 @@ function MovieInfo() {
   }, [params.id]);
 
   const hadleAddToWatchList = async () => {
+    if (!token) {
+      navigate("/user-login");
+      return;
+    }
+    dispatch(
+      addToList({
+        movie: {
+          title: movieInfo.title,
+          overview: movieInfo.overview,
+          image: movieInfo.image,
+          id: movieInfo.id,
+          providers: purchaseProviders,
+        },
+        token,
+      })
+    );
     toast.success("Added to Watch list!");
-    dispatch(addToList(movieInfo));
   };
 
   return (
     <>
-      <div
-        className={
-          "text-white flex flex-row justify-end items-center pb-[25px] pt-[25px] pr-[40px] gap-3 fixed top-0 left-0 w-full bg-black"
-        }
-      >
-        <NavLink to="/">
-          <IoHome className="h-[30px] w-[30px] text-white" />
-        </NavLink>
-
-        <RiPlayListAddFill
-          className="h-[30px] w-[30px]"
-          onClick={hadleAddToWatchList}
-        />
-      </div>
       <div>
         <iframe
           src={movieInfoTrailer}
@@ -102,9 +109,16 @@ function MovieInfo() {
             className="rounded-md group/item h-[300px] mr-[20px]"
             src={"https://image.tmdb.org/t/p/w500" + movieInfo.image}
           />
-          <p className={"text-white"}>{movieInfo.overview}</p>
+
+          <div className="flex flex-column justify-center items-center">
+            <p className={"text-white mb-[20px]"}>{movieInfo.overview}</p>
+            <ProviderLogos purchaseProviders={purchaseProviders} />
+            <IoMdAdd
+              className="h-[30px] w-[30px] text-white "
+              onClick={hadleAddToWatchList}
+            />
+          </div>
         </div>
-        <ProviderLogos purchaseProviders={purcaseProvider} />
       </div>
 
       <Toaster position="bottom-right" reverseOrder={false} />

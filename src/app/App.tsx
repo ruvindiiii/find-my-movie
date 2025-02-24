@@ -9,10 +9,7 @@ function App() {
 
   return (
     <>
-      <div>
-        <Header />
-        {inputValue ? <SearchMovies /> : <LandingPage />}
-      </div>
+      <div>{inputValue ? <SearchMovies /> : <LandingPage />}</div>
     </>
   );
 }

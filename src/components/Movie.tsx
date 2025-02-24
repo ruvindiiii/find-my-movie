@@ -7,7 +7,7 @@ type MovieProps = {
 
 function Movie(props: MovieProps) {
   return (
-    <div className="hover:scale-110 hover:shadow-lg transition duration-300">
+    <div className="hover:scale-110 hover:shadow-lg transition duration-300 w-[200px]">
       <NavLink to={`/movie-info/${props.movie.id}`}>
         <img
           className="rounded-md group/item hover:bg-slate-100 ..."

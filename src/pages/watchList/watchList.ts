@@ -1,32 +1,43 @@
-import type { MovieShape } from "../../types";
+import type {
+  MovieWithProviders,
+  MovieWithToken,
+  MovieIdWithToken,
+} from "../../types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { persistListToDb } from "../../api";
 
 type WatchListStateType = {
-  list: MovieShape[];
+  list: MovieWithProviders[];
 };
 
-var watchListItems = JSON.parse(localStorage.getItem("watchListItems") || "[]");
-
 const initialState: WatchListStateType = {
-  list: watchListItems,
+  list: [],
 };
 
 export const watchListSlice = createSlice({
   name: "watchList",
   initialState: initialState,
   reducers: {
-    addToList: (state, action: PayloadAction<MovieShape>) => {
-      state.list.push(action.payload);
-
-      localStorage.setItem("watchListItems", JSON.stringify(state.list));
+    setList: (state, action: PayloadAction<MovieWithProviders[]>) => {
+      state.list = action.payload;
     },
-    removeFromList: (state, action: PayloadAction<number>) => {
-      state.list = state.list.filter((movieObj) => {
-        return movieObj.id !== action.payload;
+    addToList: (state, action: PayloadAction<MovieWithToken>) => {
+      let filteredArr = state.list.filter((movieWithProvidersObj) => {
+        return movieWithProvidersObj.id === action.payload.movie.id;
       });
-      localStorage.setItem("watchListItems", JSON.stringify(state.list));
+      if (!filteredArr.length) {
+        state.list.push(action.payload.movie);
+        persistListToDb(state.list, action.payload.token);
+      }
+    },
+    removeFromList: (state, action: PayloadAction<MovieIdWithToken>) => {
+      state.list = state.list.filter((movieObj) => {
+        return movieObj.id !== action.payload.movieId;
+      });
+
+      persistListToDb(state.list, action.payload.token);
     },
   },
 });
 
-export const { addToList, removeFromList } = watchListSlice.actions;
+export const { addToList, removeFromList, setList } = watchListSlice.actions;
