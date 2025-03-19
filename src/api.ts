@@ -3,7 +3,7 @@ import type { MovieWithProviders } from "./types";
 const bearer =
   "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNThkZDVjOTUxZGU3NDgxMmQ0N2VhYWM1Nzc1NGQ0NiIsIm5iZiI6MTY5NTk4NjU2My45MjMsInN1YiI6IjY1MTZiMzgzOTY3Y2M3MDBhY2I4NjZiZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sYLz8lc9f6Wzx3VIDSVSfLYOhTgPClAOEpPVhO8jIAM";
 const baseUrl = "https://api.themoviedb.org/3";
-const backendUrl = "http://35.180.209.175:3000";
+export const backendUrl = "http://35.180.209.175:3000";
 
 export const getGenreObjArr = async () => {
   let url = `${baseUrl}/genre/movie/list?language=en`;
@@ -66,7 +66,7 @@ export const getLandingMovies = async () => {
   return result;
 };
 
-export const findMovies = async () => {
+export const findMovies = async (inputValue: string) => {
   let url = `${baseUrl}/search/movie?&query=${inputValue}`;
   let response = await fetch(url, {
     method: "GET",

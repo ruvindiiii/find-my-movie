@@ -26,7 +26,14 @@ function WatchList(params: type) {
   return (
     <>
       <div className=" flex flex-col align-start">
+        <h1 className="text-white text-3xl mb-[40px]">Watchlist</h1>
+
         <div className="mt-[100px] flex flex-col items-start">
+          <div className="text-white text-1xl mb-[40px]">
+            {!watchListState.list.length
+              ? "Your watchlist is empty. You can add movies to your watchlist by clicking the add to watchlist icon on the movie page."
+              : ""}
+          </div>
           {watchListState.list.map((watchListObj: MovieWithProviders) => {
             return (
               <div className={"mb-[20px]"}>

@@ -12,7 +12,7 @@ import {
   CountryInfo,
 } from "./signUp";
 import { useEffect } from "react";
-import { getCountryList } from "../api";
+import { backendUrl, getCountryList } from "../api";
 
 function SignUp(params: type) {
   const dispatch = useDispatch();
@@ -40,7 +40,7 @@ function SignUp(params: type) {
       password: password,
       selectedCountry: selectedCoutry,
     };
-    const url = "http://localhost:3000/users/register";
+    const url = `${backendUrl}/users/register`;
     let response = await fetch(url, {
       method: "POST",
       headers: {
@@ -76,7 +76,7 @@ function SignUp(params: type) {
   return (
     <>
       <div className="text-white flex flex-col justify-around items-center ">
-        <p className="mb-[16px]">Enter your details to sign up</p>
+        <p className="mb-[30px] text-3xl">Sign up</p>
         <input
           onChange={handleName}
           placeholder="Name"
@@ -84,12 +84,12 @@ function SignUp(params: type) {
         ></input>
         <input
           onChange={handleUserName}
-          placeholder="Create a User Name"
+          placeholder="Username"
           className="text-black bg-white h-[50px] w-[350px] mb-[16px] rounded-md pl-[20px]"
         ></input>
         <input
           onChange={handlePassword}
-          placeholder="Create your Passsword"
+          placeholder="Passsword"
           className="text-black bg-white h-[50px] mb-[16px] w-[350px] rounded-md pl-[20px]"
         ></input>
         <select

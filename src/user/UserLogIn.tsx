@@ -3,12 +3,21 @@ import { IoHome } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
 import { setUserName, setPassword, setError } from "./logIn";
 import { setCountry, setToken } from "./user";
+import { backendUrl } from "../api";
+import { useEffect } from "react";
 
 function UserLogIn(params: type) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { userName, password, error } = useSelector((state) => state.login);
+  const { token } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (token) {
+      navigate("/watch-list");
+    }
+  }, [token]);
 
   const handleUserName = (event: any) => {
     dispatch(setUserName(event.target.value));
@@ -19,7 +28,7 @@ function UserLogIn(params: type) {
   };
 
   const handleLoginBtn = async () => {
-    let url = "http://localhost:3000/users/login";
+    let url = `${backendUrl}/users/login`;
     let response = await fetch(url, {
       method: "POST",
       headers: {
@@ -47,16 +56,17 @@ function UserLogIn(params: type) {
   return (
     <>
       <div className="text-white flex flex-col justify-around items-center  ">
+        <h1 className="text-white text-3xl mb-[40px]">Login</h1>
         <input
           id="username"
           onChange={handleUserName}
-          placeholder="user name"
+          placeholder="Username"
           className="text-black bg-white h-[50px] w-[350px] mb-[16px] rounded-md pl-[20px]"
         ></input>
         <input
           id="password"
           onChange={handlePassword}
-          placeholder="password"
+          placeholder="Password"
           className="text-black bg-white h-[50px] w-[350px] mb-[66px] rounded-md pl-[20px]"
         ></input>
         <p>{error}</p>
@@ -67,14 +77,10 @@ function UserLogIn(params: type) {
         >
           LogIn
         </button>
-
-        <NavLink to="/">
-          <button className=" text-black  mb-[16px] w-[350px] flex align-center justify-center bg-white">
-            <IoHome className="h-[20px] w-[20px] text-black" />
-          </button>
-        </NavLink>
+        <br />
+        Do you already have an account?
         <NavLink to="/sign-up">
-          <p className=" text-white  mb-[16px]">Sign up here</p>
+          <p className=" text-blue mb-[16px]">Sign up</p>
         </NavLink>
       </div>
     </>

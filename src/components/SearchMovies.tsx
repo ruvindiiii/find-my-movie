@@ -12,7 +12,7 @@ function SearchMovies() {
 
   useEffect(() => {
     const FindMovie = async () => {
-      let movieResults = await findMovies();
+      let movieResults = await findMovies(inputValue);
 
       let searchedMovies = movieResults.results
         .filter((movie: any) => movie.poster_path)

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { IoCaretBackOutline, IoCaretForwardOutline } from "react-icons/io5";
+import type { MovieShape } from "../../types";
 
 import MovieList from "../../components/MovieList";
 import { useDispatch } from "react-redux";
@@ -14,10 +15,18 @@ import { getLandingMovies } from "../../api";
 const bearer =
   "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNThkZDVjOTUxZGU3NDgxMmQ0N2VhYWM1Nzc1NGQ0NiIsIm5iZiI6MTY5NTk4NjU2My45MjMsInN1YiI6IjY1MTZiMzgzOTY3Y2M3MDBhY2I4NjZiZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sYLz8lc9f6Wzx3VIDSVSfLYOhTgPClAOEpPVhO8jIAM";
 
+interface RootState {
+  landingPageMovies: {
+    landingMovies: MovieShape[];
+    landingTrailers: string[];
+    landingTrailerIndex: number;
+  };
+}
+
 function LandingPage() {
   const dispatch = useDispatch();
   const { landingMovies, landingTrailers, landingTrailerIndex } = useSelector(
-    (state) => state.landingPageMovies
+    (state: RootState) => state.landingPageMovies
   );
 
   useEffect(() => {
@@ -81,12 +90,14 @@ function LandingPage() {
           <button onClick={handlePrevtBtn} className="bg-black color-white">
             <IoCaretBackOutline color="grey" />
           </button>
-          <iframe
-            src={landingTrailers[landingTrailerIndex]}
-            allow="autoplay"
-            className="w-full h-[620px]"
-            title="video"
-          />
+          <div className="relative w-full pt-[56.25%]">
+            <iframe
+              src={landingTrailers[landingTrailerIndex]}
+              allow="autoplay"
+              className="absolute top-0 left-0 w-full h-full"
+              title="video"
+            />
+          </div>
           <button onClick={handleNextBtn} className="bg-black color-white">
             <IoCaretForwardOutline color="grey" />
           </button>

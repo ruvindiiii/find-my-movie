@@ -23,7 +23,7 @@ function Header() {
   const { inputValue } = useSelector((state: RootState) => state.headerSearch);
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 bg-black">
+      <div className="fixed top-0 left-0 right-0 bg-black z-10">
         <div className="max-w-[1200px] w-full mx-auto">
           <div className="flex flex-row pb-[25px] pt-[25px] gap-10 items-center">
             <NavLink to={"/"}>

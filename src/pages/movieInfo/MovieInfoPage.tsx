@@ -111,6 +111,7 @@ function MovieInfo() {
           <div className="flex flex-column justify-center items-center">
             <p className={"text-white mb-[20px]"}>{movieInfo.overview}</p>
             <ProviderLogos purchaseProviders={purchaseProviders} />
+            <span className="text-white mb-[20px]">Add To Watchlist</span>
             <IoMdAdd
               className="h-[30px] w-[30px] text-white "
               onClick={hadleAddToWatchList}
