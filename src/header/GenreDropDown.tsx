@@ -9,7 +9,9 @@ import { getGenreObjArr } from "../api";
 const GenreDropDown = () => {
   const dispatch = useDispatch();
 
-  const { genres } = useSelector((state) => state.genre);
+  const { genres } = useSelector(
+    (state: { genre: { genres: any[] } }) => state.genre
+  );
 
   useEffect(() => {
     const GetGenres = async () => {
@@ -28,7 +30,7 @@ const GenreDropDown = () => {
     GetGenres();
   }, []);
   return (
-    <Space direction="vertical">
+    <Space direction="vertical" className="hidden xs:block">
       <Space wrap>
         <Dropdown
           menu={{
@@ -39,7 +41,9 @@ const GenreDropDown = () => {
             pointAtCenter: true,
           }}
         >
-          <Button className="h-[42px] bg-black text-white">Genres</Button>
+          <Button className="h-9 sm:h-[42px] bg-black text-white text-sm sm:text-base">
+            Genres
+          </Button>
         </Dropdown>
       </Space>
       <Space wrap></Space>
