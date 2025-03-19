@@ -10,38 +10,32 @@ import { NavLink } from "react-router";
 function Header() {
   const dispatch = useDispatch();
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event) => {
     dispatch(setInputValue(event.target.value));
   };
 
-  const { inputValue } = useSelector(
-    (state: { headerSearch: { inputValue: string } }) => state.headerSearch
-  );
+  const { inputValue } = useSelector((state) => state.headerSearch);
   return (
     <>
-      <div className="fixed top-0 left-0 w-full bg-black z-10 py-5">
-        <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
-          <div className="flex items-center gap-3 sm:gap-6">
-            <NavLink to={"/"}>
-              <BiCameraMovie className="text-white h-8 w-8 sm:h-10 sm:w-10" />
-            </NavLink>
+      <div className="flex flex-row pb-[25px] pt-[25px] pl-[40px] gap-10 fixed top-0 left-0 w-full bg-black ">
+        <NavLink to={"/"}>
+          <BiCameraMovie className="text-white h-[40px] w-[40px]" />
+        </NavLink>
 
-            <input
-              onChange={handleInputChange}
-              placeholder="Search Movie"
-              className="bg-black border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-full max-w-[300px] sm:max-w-[400px] p-2.5"
-              value={inputValue}
-            />
-            <GenreDropDown />
-            <div className="flex items-center ml-auto gap-4">
-              <NavLink to={"/user-login"}>
-                <MdAccountCircle className="text-white h-8 w-8 sm:h-10 sm:w-10" />
-              </NavLink>
-              <NavLink to={"/watch-list"}>
-                <HiViewList className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
-              </NavLink>
-            </div>
-          </div>
+        <input
+          onChange={handleInputChange}
+          placeholder="Search Movie"
+          className="bg-black border border-gray-300 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[500px]  ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600  "
+          value={inputValue}
+        />
+        <GenreDropDown />
+        <div className="flex flex-row ml-[800px]">
+          <NavLink to={"/user-login"}>
+            <MdAccountCircle className="text-white h-[40px] w-[40px] mr-[20px]" />
+          </NavLink>
+          <NavLink to={"/watch-list"}>
+            <HiViewList className="h-[40px] w-[40px] text-white " />
+          </NavLink>
         </div>
       </div>
     </>
