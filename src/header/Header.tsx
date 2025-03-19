@@ -30,7 +30,7 @@ function Header() {
   const { inputValue } = useSelector((state: RootState) => state.headerSearch);
   return (
     <>
-      <div className="fixed top-0 left-0 right-0 bg-black">
+      <div className="fixed top-0 left-0 right-0 bg-black z-50">
         <div className="max-w-[1200px] w-full mx-auto px-[30px]">
           <div className="flex flex-row pb-[25px] pt-[25px] gap-4 md:gap-10 items-center">
             <NavLink to={"/"}>
@@ -48,7 +48,7 @@ function Header() {
             <div
               className={`${
                 isSearchVisible
-                  ? "flex absolute left-0 right-0 top-full bg-black p-4"
+                  ? "flex absolute left-0 right-0 top-full bg-black p-4 z-50"
                   : "hidden"
               } md:flex md:relative md:bg-transparent md:p-0 md:flex-1`}
             >
