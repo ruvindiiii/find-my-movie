@@ -4,12 +4,21 @@ type SignUpPageStateShape = {
   password: string;
   userName: string;
   name: string;
+  countries: CountryInfo[];
+  selectedCoutry: string;
+};
+
+export type CountryInfo = {
+  displayName: string;
+  code: string;
 };
 
 const initialSignUpState: SignUpPageStateShape = {
   password: "",
   userName: "",
   name: "",
+  countries: [],
+  selectedCoutry: "",
 };
 export const SignUpPageSlice = createSlice({
   name: "signUp",
@@ -24,7 +33,19 @@ export const SignUpPageSlice = createSlice({
     setName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
     },
+    setCountries: (state, action: PayloadAction<CountryInfo[]>) => {
+      state.countries = action.payload;
+    },
+    setSelectedCountry: (state, action: PayloadAction<string>) => {
+      state.selectedCoutry = action.payload;
+    },
   },
 });
 
-export const { setPassWord, setUserName, setName } = SignUpPageSlice.actions;
+export const {
+  setPassWord,
+  setUserName,
+  setName,
+  setCountries,
+  setSelectedCountry,
+} = SignUpPageSlice.actions;

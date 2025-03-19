@@ -39,7 +39,7 @@ const GenreDropDown = () => {
             pointAtCenter: true,
           }}
         >
-          <Button>Genres</Button>
+          <Button className="h-[42px] bg-black text-white">Genres</Button>
         </Dropdown>
       </Space>
       <Space wrap></Space>

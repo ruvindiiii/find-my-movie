@@ -2,8 +2,6 @@ import { useEffect } from "react";
 import { NavLink, useParams, useNavigate } from "react-router";
 import toast, { Toaster } from "react-hot-toast";
 import { IoMdAdd } from "react-icons/io";
-import { HiViewList } from "react-icons/hi";
-import { IoHome } from "react-icons/io5";
 import { addToList } from "../watchList/watchList";
 import {
   setMovieInfo,
@@ -20,7 +18,7 @@ function MovieInfo() {
   const dispatch = useDispatch();
   const { movieInfo, movieInfoTrailer, purchaseProviders, rentProvider } =
     useSelector((state) => state.movieInfo);
-  const { token } = useSelector((state) => state.login);
+  const { token } = useSelector((state) => state.user);
   let params = useParams();
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getWatchList } from "../api";
 
 function StateSyncer() {
-  let { token } = useSelector((state) => state.login);
+  let { token } = useSelector((state) => state.user);
   let dispatch = useDispatch();
   useEffect(() => {
     const getMovieWatchList = async () => {

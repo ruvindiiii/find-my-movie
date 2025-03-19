@@ -4,14 +4,12 @@ type loginPageStateShape = {
   userName: string;
   password: string;
   error: string;
-  token: string;
 };
-let existingToken = localStorage.getItem("token");
+
 const initialLoginPageState: loginPageStateShape = {
   userName: "",
   password: "",
   error: "",
-  token: existingToken ? existingToken : "",
 };
 
 export const logInSlice = createSlice({
@@ -27,13 +25,7 @@ export const logInSlice = createSlice({
     setError: (state, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
-    setToken: (state, action: PayloadAction<string>) => {
-      state.token = action.payload;
-
-      localStorage.setItem("token", state.token);
-    },
   },
 });
 
-export const { setUserName, setPassword, setError, setToken } =
-  logInSlice.actions;
+export const { setUserName, setPassword, setError } = logInSlice.actions;

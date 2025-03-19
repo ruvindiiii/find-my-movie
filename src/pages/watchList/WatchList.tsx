@@ -1,9 +1,9 @@
-import { NavLink, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { GiHeartMinus } from "react-icons/gi";
 import { removeFromList } from "./watchList";
 import { useDispatch } from "react-redux";
-import { IoHome } from "react-icons/io5";
+
 import ProviderLogos from "../movieInfo/ProviderLogos";
 import type { MovieWithProviders } from "../../types";
 import { useEffect } from "react";
@@ -12,7 +12,7 @@ function WatchList(params: type) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const watchListState = useSelector((state) => state.watchList);
-  const { token } = useSelector((state) => state.login);
+  const { token } = useSelector((state) => state.user);
   const handleRemoveBtn = (id) => {
     dispatch(removeFromList({ movieId: id, token }));
   };

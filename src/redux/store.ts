@@ -7,6 +7,7 @@ import { movieInfoSlice } from "../pages/movieInfo/movieInfo";
 import { headerSearchSlice } from "../header/headerSearch";
 import { SignUpPageSlice } from "../user/signUp";
 import { logInSlice } from "../user/logIn";
+import { userSlice } from "../user/user";
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     headerSearch: headerSearchSlice.reducer,
     signUp: SignUpPageSlice.reducer,
     login: logInSlice.reducer,
+    user: userSlice.reducer,
   },
 });
 

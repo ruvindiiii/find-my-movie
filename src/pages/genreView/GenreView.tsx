@@ -31,7 +31,7 @@ function GenreView() {
 
   return (
     <>
-      <div className="text-white">
+      <div className="text-white mt-[110px]">
         <MovieList movies={movies} />
       </div>
     </>

@@ -1,7 +1,8 @@
 import { NavLink, useNavigate } from "react-router";
 import { IoHome } from "react-icons/io5";
 import { useSelector, useDispatch } from "react-redux";
-import { setUserName, setPassword, setError, setToken } from "./logIn";
+import { setUserName, setPassword, setError } from "./logIn";
+import { setCountry, setToken } from "./user";
 
 function UserLogIn(params: type) {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function UserLogIn(params: type) {
     console.log(result);
     if (result.status === "Ok" && result.token) {
       dispatch(setToken(result.token));
+      dispatch(setCountry(result.country));
       navigate("/watch-list");
 
       //navigate to the watch list page
