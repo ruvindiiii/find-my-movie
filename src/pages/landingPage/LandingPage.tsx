@@ -77,14 +77,14 @@ function LandingPage() {
   return (
     <>
       <div>
-        <div className="flex flex-row justify-center mb-10">
+        <div className="flex flex-row justify-center mb-10 mt-[110px]">
           <button onClick={handlePrevtBtn} className="bg-black color-white">
             <IoCaretBackOutline color="grey" />
           </button>
           <iframe
             src={landingTrailers[landingTrailerIndex]}
             allow="autoplay"
-            className="w-full h-[620px] mt-[110px]"
+            className="w-full h-[620px]"
             title="video"
           />
           <button onClick={handleNextBtn} className="bg-black color-white">
