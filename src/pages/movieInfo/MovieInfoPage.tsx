@@ -3,6 +3,7 @@ import { NavLink, useParams, useNavigate } from "react-router";
 import toast, { Toaster } from "react-hot-toast";
 import { IoMdAdd } from "react-icons/io";
 import { addToList } from "../watchList/watchList";
+import { Rate } from "antd";
 import {
   setMovieInfo,
   setMovieInfoTrailer,
@@ -30,6 +31,7 @@ function MovieInfo() {
           overview: result.overview,
           id: result.id,
           image: result.poster_path,
+          rating: result.vote_average,
         })
       );
     };
@@ -95,25 +97,33 @@ function MovieInfo() {
 
   return (
     <>
-      <div>
+      <div className="container-xl mb-10">
         <iframe
           src={movieInfoTrailer}
           allow="autoplay"
           className="w-full h-[620px] mb-10 mt-[110px]"
           title="video"
         />
-        <div className="flex flex-row justify-center items-center">
+        <hr className="text-white mb-5 mt-10" />
+        <div className="flex flex-row flex-wrap justify-center items-center">
           <img
-            className="rounded-md group/item h-[300px] mr-[20px]"
+            className="rounded-md group/item mr-[20px] flex-[1]"
             src={"https://image.tmdb.org/t/p/w500" + movieInfo.image}
           />
 
-          <div className="flex flex-column justify-center items-center">
-            <p className={"text-white mb-[20px]"}>{movieInfo.overview}</p>
+          <div className="flex flex-column items-center flex-[2]">
+            <h1 className="text-white mb-10 font-bold pt-10">
+              {movieInfo.title}
+            </h1>
+            <p className="text-white mb-[20px] text-xl">{movieInfo.overview}</p>
+            <p className="text-white mb-3 mt-3">{movieInfo.rating} / 10</p>
+            <Rate count={10} value={movieInfo.rating} />;
             <ProviderLogos purchaseProviders={purchaseProviders} />
-            <span className="text-white mb-[20px]">Add To Watchlist</span>
+            <span className="text-white mb-[20px] text-xl">
+              Add To Watchlist
+            </span>
             <IoMdAdd
-              className="h-[30px] w-[30px] text-white "
+              className="h-[30px] w-[30px] text-white"
               onClick={hadleAddToWatchList}
             />
           </div>

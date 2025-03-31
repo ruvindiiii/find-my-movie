@@ -39,7 +39,10 @@ function Header() {
 
             {/* Mobile Search Icon */}
             <div className="md:hidden">
-              <button onClick={toggleSearch} className="text-white">
+              <button
+                onClick={toggleSearch}
+                className="bg-transparent text-white"
+              >
                 <IoSearchOutline className="h-[24px] w-[24px]" />
               </button>
             </div>

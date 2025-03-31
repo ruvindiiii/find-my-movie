@@ -3,6 +3,7 @@ export type MovieShape = {
   overview: string;
   image: string;
   id: number;
+  rating: number;
 };
 
 export type MovieWithProviders = {

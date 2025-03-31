@@ -1,50 +1,36 @@
-# React + TypeScript + Vite
+# Find My Movie - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Find my movie is a barebones movie explorer built leveraging the TMDB API and a [custom backend](https://github.com/ruvindiiii/find-my-movie-backend/). The webapp allows you to search, view and maintain your watchlists. It also provides information about where you can watch the movie (providers like Amazon Prime, Netflix, etc).
 
-Currently, two official plugins are available:
+# Screenshots
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Movie Info Page
 
-## Expanding the ESLint configuration
+## Landing Page
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Search Page
 
-- Configure the top-level `parserOptions` property like this:
+## Watchlist Page
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+# Live Demo
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+Currently there is a live version hosted on [S3](TODO) which communicates with the [backend](<(https://github.com/ruvindiiii/find-my-movie-backend/)>) hosted on an EC2 instance.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+# Getting started
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+In order to develop or run, clone the repository and then create an .env file based on the .env.sample file in the root. Then you will be able to run the project using `npm run dev`
+
+Tailwind should also be run separately using `npm run tailwind` which will run in watch mode.
+
+The project uses a standard Vite + React + TS setup.
+
+# Functionalities
+
+- Search movies
+- Search by genre
+- View trailers / description
+- View movie providers
+- View movie rating
+- Create watchlist
+- User login
+- User register

@@ -42,20 +42,19 @@ function WatchList(params: type) {
                     className="rounded-md group/item h-[300px] mr-[20px]"
                     src={"https://image.tmdb.org/t/p/w500" + watchListObj.image}
                   />
-                  <div className="flex flex-column ">
+                  <div className="flex flex-column items-center">
                     <p className="text-white w-[600px] mb-10">
                       {watchListObj.overview}
                     </p>
                     <ProviderLogos purchaseProviders={watchListObj.providers} />
+                    <GiHeartMinus
+                      className={"text-red-500 h-[30px] w-[30px] mt-1"}
+                      onClick={() => {
+                        handleRemoveBtn(watchListObj.id);
+                      }}
+                    />
                   </div>
                 </div>
-
-                <GiHeartMinus
-                  className={"text-white h-[30px] w-[30px] mt-3"}
-                  onClick={() => {
-                    handleRemoveBtn(watchListObj.id);
-                  }}
-                />
               </div>
             );
           })}

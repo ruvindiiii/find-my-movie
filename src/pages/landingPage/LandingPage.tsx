@@ -10,10 +10,7 @@ import {
   setLandingPageTrailerIndex,
 } from "./landingPageMovies";
 import { useSelector } from "react-redux";
-import { getLandingMovies } from "../../api";
-
-const bearer =
-  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNThkZDVjOTUxZGU3NDgxMmQ0N2VhYWM1Nzc1NGQ0NiIsIm5iZiI6MTY5NTk4NjU2My45MjMsInN1YiI6IjY1MTZiMzgzOTY3Y2M3MDBhY2I4NjZiZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sYLz8lc9f6Wzx3VIDSVSfLYOhTgPClAOEpPVhO8jIAM";
+import { getLandingMovies, getLandingPageTrailers } from "../../api";
 
 interface RootState {
   landingPageMovies: {
@@ -41,29 +38,8 @@ function LandingPage() {
         };
       });
       dispatch(setLandingPageMovies(mappedMovies));
-
-      let movieDetailFetchUrlArr = mappedMovies.map((listItem: any) => {
-        return `https://api.themoviedb.org/3/movie/${listItem.id}/videos`;
-      });
-
-      let trailerKeyArr = [];
-      for (let i = 0; i < movieDetailFetchUrlArr.length; i++) {
-        let response = await fetch(movieDetailFetchUrlArr[i], {
-          method: "GET",
-          headers: {
-            Authorization: bearer,
-          },
-        });
-        result = await response.json();
-
-        if (result.results.length) {
-          trailerKeyArr.push(
-            `https://www.youtube.com/embed/${result.results[0].key}`
-          );
-        }
-      }
-
-      dispatch(setLandingPageTrailers(trailerKeyArr));
+      const trailers = await getLandingPageTrailers(mappedMovies);
+      dispatch(setLandingPageTrailers(trailers));
     };
     GetData();
   }, []);

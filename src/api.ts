@@ -1,16 +1,15 @@
-import type { MovieWithProviders } from "./types";
+import type { MovieShape, MovieWithProviders } from "./types";
 
-const bearer =
-  "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNThkZDVjOTUxZGU3NDgxMmQ0N2VhYWM1Nzc1NGQ0NiIsIm5iZiI6MTY5NTk4NjU2My45MjMsInN1YiI6IjY1MTZiMzgzOTY3Y2M3MDBhY2I4NjZiZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.sYLz8lc9f6Wzx3VIDSVSfLYOhTgPClAOEpPVhO8jIAM";
-const baseUrl = "https://api.themoviedb.org/3";
-export const backendUrl = "http://35.180.209.175:3000";
+const tmdbBearer = import.meta.env.VITE_TMDB_BEARER;
+const tmdbBaseUrl = import.meta.env.VITE_TMDB_BASE_URL;
+export const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 export const getGenreObjArr = async () => {
-  let url = `${baseUrl}/genre/movie/list?language=en`;
+  let url = `${tmdbBaseUrl}/genre/movie/list?language=en`;
   let response = await fetch(url, {
     method: "GET",
     headers: {
-      Authorization: bearer,
+      Authorization: tmdbBearer,
     },
   });
   let result = await response.json();
@@ -19,11 +18,11 @@ export const getGenreObjArr = async () => {
 };
 
 export const getMovieData = async (id: any) => {
-  let url = `${baseUrl}/movie/${id}`;
+  let url = `${tmdbBaseUrl}/movie/${id}`;
   let response = await fetch(url, {
     method: "GET",
     headers: {
-      Authorization: bearer,
+      Authorization: tmdbBearer,
     },
   });
   let result = await response.json();
@@ -31,11 +30,11 @@ export const getMovieData = async (id: any) => {
 };
 
 export const getMovieDataUrl = async (id: any) => {
-  let movieInfoUrl = `${baseUrl}/movie/${id}/videos`;
+  let movieInfoUrl = `${tmdbBaseUrl}/movie/${id}/videos`;
   let response = await fetch(movieInfoUrl, {
     method: "GET",
     headers: {
-      Authorization: bearer,
+      Authorization: tmdbBearer,
     },
   });
   let result = await response.json();
@@ -43,11 +42,11 @@ export const getMovieDataUrl = async (id: any) => {
 };
 
 export const genreMovies = async (id: any) => {
-  let url = `${baseUrl}/discover/movie?with_genres=${id}`;
+  let url = `${tmdbBaseUrl}/discover/movie?with_genres=${id}`;
   let response = await fetch(url, {
     method: "GET",
     headers: {
-      Authorization: bearer,
+      Authorization: tmdbBearer,
     },
   });
   let result = await response.json();
@@ -55,11 +54,11 @@ export const genreMovies = async (id: any) => {
 };
 
 export const getLandingMovies = async () => {
-  let url = `${baseUrl}/discover/movie`;
+  let url = `${tmdbBaseUrl}/discover/movie`;
   let response = await fetch(url, {
     method: "GET",
     headers: {
-      Authorization: bearer,
+      Authorization: tmdbBearer,
     },
   });
   let result = await response.json();
@@ -67,11 +66,11 @@ export const getLandingMovies = async () => {
 };
 
 export const findMovies = async (inputValue: string) => {
-  let url = `${baseUrl}/search/movie?&query=${inputValue}`;
+  let url = `${tmdbBaseUrl}/search/movie?&query=${inputValue}`;
   let response = await fetch(url, {
     method: "GET",
     headers: {
-      Authorization: bearer,
+      Authorization: tmdbBearer,
     },
   });
   let movieResults = await response.json();
@@ -79,11 +78,11 @@ export const findMovies = async (inputValue: string) => {
 };
 
 export const movieProviders = async (id: string | undefined) => {
-  let url = `${baseUrl}/movie/${id}/watch/providers`;
+  let url = `${tmdbBaseUrl}/movie/${id}/watch/providers`;
   let response = await fetch(url, {
     method: "GET",
     headers: {
-      Authorization: bearer,
+      Authorization: tmdbBearer,
     },
   });
   let result = await response.json();
@@ -122,14 +121,38 @@ export const getWatchList = async (
 };
 
 export const getCountryList = async () => {
-  let url = "https://api.themoviedb.org/3/configuration/countries";
+  let url = `${tmdbBaseUrl}/3/configuration/countries`;
   let response = await fetch(url, {
     method: "GET",
     headers: {
-      Authorization: bearer,
+      Authorization: tmdbBearer,
     },
   });
   let result = await response.json();
-  console.log(result);
   return result;
+};
+
+export const getLandingPageTrailers = async (mappedMovies: MovieShape[]) => {
+  let movieDetailFetchUrlArr = mappedMovies.map((listItem: any) => {
+    return `${tmdbBaseUrl}/movie/${listItem.id}/videos`;
+  });
+
+  let trailerKeyArr = [];
+  for (let i = 0; i < movieDetailFetchUrlArr.length; i++) {
+    let response = await fetch(movieDetailFetchUrlArr[i], {
+      method: "GET",
+      headers: {
+        Authorization: tmdbBearer,
+      },
+    });
+    const result = await response.json();
+
+    if (result.results.length) {
+      trailerKeyArr.push(
+        `https://www.youtube.com/embed/${result.results[0].key}`
+      );
+    }
+  }
+
+  return trailerKeyArr;
 };
