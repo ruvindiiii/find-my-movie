@@ -6,19 +6,19 @@ Find my movie is a barebones movie explorer built leveraging the TMDB API and a 
 
 ## Movie Info Page
 
-![alt landing-page](https://raw.githubusercontent.com/ruvindiiii/find-my-movie/refs/heads/main/preview/movie-info-page.png)
+![alt landing-page](https://raw.githubusercontent.com/ruvindiiii/find-my-movie/refs/heads/main/preview/movie-info-page-sc.png)
 
 ## Landing Page
 
-![alt landing-page](https://raw.githubusercontent.com/ruvindiiii/find-my-movie/refs/heads/main/preview/landing-page.png)
+![alt landing-page](https://raw.githubusercontent.com/ruvindiiii/find-my-movie/refs/heads/main/preview/landing-page-sc.png)
 
 ## Search Page
 
-![alt landing-page](https://raw.githubusercontent.com/ruvindiiii/find-my-movie/refs/heads/main/preview/search-page.png)
+![alt landing-page](https://raw.githubusercontent.com/ruvindiiii/find-my-movie/refs/heads/main/preview/search-page-sc.png)
 
 ## Watchlist Page
 
-![alt landing-page](https://raw.githubusercontent.com/ruvindiiii/find-my-movie/refs/heads/main/preview/watchlist-page.png)
+![alt landing-page](https://raw.githubusercontent.com/ruvindiiii/find-my-movie/refs/heads/main/preview/watchlist-page-sc.png)
 
 # Live Demo
 
