@@ -22,7 +22,7 @@ Find my movie is a barebones movie explorer built leveraging the TMDB API and a 
 
 # Live Demo
 
-Currently there is a [live version hosted on S3](TODO) which communicates with the [backend](<(https://github.com/ruvindiiii/find-my-movie-backend/)>) hosted on an EC2 instance.
+Currently there is a [live version hosted on S3](http://findmymovieapp.s3-website.eu-west-3.amazonaws.com) which communicates with the [backend](<(https://github.com/ruvindiiii/find-my-movie-backend/)>) hosted on an EC2 instance.
 
 # Getting started
 
